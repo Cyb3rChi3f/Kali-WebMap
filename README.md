@@ -28,15 +28,18 @@ A Web Dashbord for Nmap XML Report
 You should use this with docker, just by sending this command:
 ```bash
 $ mkdir /tmp/webmap
+$ git clone https://github.com/Cyb3rChi3f/Kali-WebMap.git
+$ cd WebMap/docker
+$ docker build -t webmap:latest .
 $ docker run -d \
          --name webmap \
          -h webmap \
          -p 8000:8000 \
          -v /tmp/webmap:/opt/xml \
-         reborntc/webmap
+         webmap:latest
 
 $ # now you can run Nmap and save the XML Report on /tmp/webmap
-$ nmap -sT -A -T4 -oX /tmp/webmap/myscan.xml 192.168.1.0/24
+$ docker exec -ti webmap nmap -sT -A -T4 -oX /tmp/webmap/myscan.xml 192.168.1.0/24
 ```
 Now point your browser to http://localhost:8000
 
